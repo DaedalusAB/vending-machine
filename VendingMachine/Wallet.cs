@@ -29,5 +29,8 @@ namespace VendingMachine
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<int> AvailableCoinValues =>
+            _credits.Distinct().Select(c => c.Value);
     }
 }

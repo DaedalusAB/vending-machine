@@ -4,6 +4,6 @@ namespace VendingMachine
 {
     public interface IWalletChangeStrategy
     {
-        IEnumerable<Credit> Take(int ammount);
+        IEnumerable<IEnumerable<Credit>> MakeChange(int ammount, IEnumerable<int> availableCreditValues);
     }
 }

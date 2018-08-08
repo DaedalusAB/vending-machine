@@ -27,14 +27,26 @@ namespace VendingMachineTests
 
         [Theory]
         [MemberData(nameof(InputCredits))]
-        public void AddCretisToWallet_Should_IncreaseBallance(IEnumerable<Credit> credits)
+        public void AddCredtisToWallet_Should_IncreaseBallance(List<Credit> credits)
         {
-            var creditsList = credits.ToList();     //  TODO: possible multiple enumeration of IEnumerable - cool? not cool?
             var wallet = new Wallet(null);
-            var totalCreditValue = creditsList.Sum(c => c.Value);
-            wallet.Add(creditsList);
+            var totalCreditValue = credits.Sum(c => c.Value);
+            wallet.Add(credits);
 
             Assert.Equal(totalCreditValue, wallet.GetBalance());
+        }
+
+        [Fact]
+        public void AvailableCreditValues_Should_ReturnAllDistinctCoinValuesTheWalletContains()
+        {
+            var wallet = new Wallet(null);
+            wallet.Add(new List<Credit>() { new Credit(10), new Credit(10), new Credit(50), new Credit(100) });
+
+            var availableCoinValues = wallet.AvailableCoinValues.ToList();
+
+            Assert.Contains(10, availableCoinValues);
+            Assert.Contains(50, availableCoinValues);
+            Assert.Contains(100, availableCoinValues);
         }
 
         public static IEnumerable<object[]> InputCredits()
