@@ -10,7 +10,8 @@ namespace VendingMachine
         {
             return ammount == 0
                 ? new List<List<Credit>>()
-                : MakeChange(ammount, 0, availableCreditValues, new Stack<Credit>(), new List<List<Credit>>());
+                : MakeChange(ammount, 0, availableCreditValues, new Stack<Credit>(), new List<List<Credit>>())
+                    .Distinct(new CreditListComparer());
         }
 
         private List<List<Credit>> MakeChange(int ammount, int index, IReadOnlyList<int> availableCreditValues,
