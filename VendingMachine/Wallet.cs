@@ -8,12 +8,12 @@ namespace VendingMachine
     public class Wallet : IWallet
     {
         private readonly List<Credit> _credits;
-        private readonly IWalletChangeStrategy _walletChangeStrategy;
+        private readonly IMakeChangeStrategy _makeChangeStrategy;
         
-        public Wallet(IWalletChangeStrategy walletChangeStrategy)
+        public Wallet(IMakeChangeStrategy makeChangeStrategy)
         {
             _credits = new List<Credit>();
-            _walletChangeStrategy = walletChangeStrategy;
+            _makeChangeStrategy = makeChangeStrategy;
         }
 
         public int GetBalance() =>
