@@ -9,26 +9,6 @@ namespace VendingMachineTests
 {
     public class MakeChangeStrategyTests
     {
-        [Fact]
-        public void Test()
-        {
-            var makeChangeStrategy = new MakeChangeStrategy();
-            var solutions = makeChangeStrategy.MakeChange(17, new List<int>() {25, 10, 5});
-
-            var sb = new StringBuilder();
-            foreach (var solution in solutions)
-            {
-                sb.Append("[");
-                foreach (var credit in solution)
-                {
-                    sb.Append(credit.Value + ", ");
-                }
-                sb.Append("]\n");
-            }
-
-            var stringSolutions = sb.ToString();
-        }
-
         [Theory]
         [MemberData(nameof(ChangeWays))]
         public void MakeChange_Should_ReturnAllDistincCombinations(int ammount, List<int> availableCredits, int distinctSolutionCount)
