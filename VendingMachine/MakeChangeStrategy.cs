@@ -22,7 +22,6 @@ namespace VendingMachine
             {
                 return solutions;
             }
-
             combo.Push(new Credit(largestApplicableCreditValue));
 
             if (ammount == largestApplicableCreditValue)
