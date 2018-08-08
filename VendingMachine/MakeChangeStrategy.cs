@@ -18,8 +18,13 @@ namespace VendingMachine
             Stack<Credit> combo, List<List<Credit>> solutions)
         {
             var largestApplicableCreditValue = availableCreditValues.Skip(index).FirstOrDefault(c => c <= ammount);
+            if (largestApplicableCreditValue == 0)
+            {
+                return solutions;
+            }
 
             combo.Push(new Credit(largestApplicableCreditValue));
+
             if (ammount == largestApplicableCreditValue)
             {
                 var solution = combo.ToList();

@@ -13,7 +13,7 @@ namespace VendingMachineTests
         public void Test()
         {
             var makeChangeStrategy = new MakeChangeStrategy();
-            var solutions = makeChangeStrategy.MakeChange(45, new List<int>() {25, 10, 5});
+            var solutions = makeChangeStrategy.MakeChange(17, new List<int>() {25, 10, 5});
 
             var sb = new StringBuilder();
             foreach (var solution in solutions)
@@ -29,11 +29,21 @@ namespace VendingMachineTests
             var stringSolutions = sb.ToString();
         }
 
+        [Theory]
+        [MemberData(nameof(ChangeWays))]
+        public void MakeChange_Should_ReturnAllDistincCombinations(int ammount, List<int> availableCredits, int distinctSolutionCount)
+        {
+            var makeChangeStrategy = new MakeChangeStrategy();
+            var changeCombinations = makeChangeStrategy.MakeChange(ammount, availableCredits);
+
+            Assert.Equal(distinctSolutionCount, changeCombinations.Count());
+        }
+
         public static IEnumerable<object[]> ChangeWays()
         {
-            yield return new object[] { 45, new int[] { 25, 10, 5 }, 8 };
-            yield return new object[] { 17, new int[] { 25, 10, 5 }, 0 };
-            yield return new object[] { 17, new int[] { 25, 10, 1 }, 2 };
+            yield return new object[] { 45, new List<int>() { 25, 10, 5 }, 8 };
+            yield return new object[] { 17, new List<int>() { 25, 10, 5 }, 0 };
+            yield return new object[] { 17, new List<int>() { 25, 10, 1 }, 2 };
         }
     }
 }
